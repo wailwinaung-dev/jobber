@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+
+  """Email field (example@mail.com)"""
+  email: String!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+}
+
+input CreateUserInput {
+  """Email field (example@mail.com)"""
+  email: String!
+
+  """Password field"""
+  password: String!
+}
+
+input UpdateUserInput {
+  """Email field (example@mail.com)"""
+  email: String
+
+  """Password field"""
+  password: String
+  id: Int!
+}
