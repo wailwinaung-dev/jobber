@@ -8,6 +8,9 @@
     },
     {
       "path": "./apps/jobber-auth"
+    },
+    {
+      "path": "./libs/nestjs"
     }
   ]
 }

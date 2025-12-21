@@ -14,7 +14,6 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudId": "6942818ae6c40277eba1c10f",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -28,7 +27,8 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      }
+      },
+      "exclude": ["libs/nestjs/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -62,6 +62,15 @@
         },
         "runTarget": {
           "name": "docker:run"
+        }
+      }
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "include": ["libs/nestjs/*"],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
         }
       }
     }
