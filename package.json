@@ -2,7 +2,9 @@
   "name": "@jobber/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky"
+  },
   "private": true,
   "dependencies": {
     "@apollo/server": "^5.2.0",
