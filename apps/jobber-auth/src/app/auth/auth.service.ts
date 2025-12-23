@@ -42,4 +42,8 @@ export class AuthService {
 
     return user;
   }
+
+  async validateUser(payload: JwtPayload) {
+    return this.usersService.findOne(payload.id);
+  }
 }
