@@ -28,7 +28,7 @@
           "watchDepsName": "watch-deps"
         }
       },
-      "exclude": ["libs/nestjs/*"]
+      "exclude": ["libs/nestjs/*", "libs/protos/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -67,7 +67,7 @@
     },
     {
       "plugin": "@nx/js/typescript",
-      "include": ["libs/nestjs/*"],
+      "include": ["libs/nestjs/*", "libs/protos/*"],
       "options": {
         "typecheck": {
           "targetName": "typecheck"
