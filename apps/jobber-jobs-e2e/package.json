@@ -1,0 +1,26 @@
+{
+  "name": "@jobber/jobber-jobs-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@jobber/jobber-jobs"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/jobber-jobs-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@jobber/jobber-jobs:build",
+          "@jobber/jobber-jobs:serve"
+        ]
+      }
+    }
+  }
+}

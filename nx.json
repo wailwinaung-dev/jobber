@@ -52,7 +52,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/jobber-auth-e2e/**/*"]
+      "exclude": ["apps/jobber-auth-e2e/**/*", "apps/jobber-jobs-e2e/**/*"]
     },
     {
       "plugin": "@nx/docker",

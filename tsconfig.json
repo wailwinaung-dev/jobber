@@ -11,6 +11,12 @@
     },
     {
       "path": "./libs/nestjs"
+    },
+    {
+      "path": "./apps/jobber-jobs-e2e"
+    },
+    {
+      "path": "./apps/jobber-jobs"
     }
   ]
 }
