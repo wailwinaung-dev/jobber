@@ -15,11 +15,18 @@ module.exports = {
       compiler: 'tsc',
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
-      assets: ["./src/assets"],
+      assets: [
+        './src/assets',
+        {
+          input: '../../libs/protos/src/lib', // Path to your proto files
+          glob: '**/*.proto', // Only copy .proto files
+          output: 'proto', // Destination folder in dist
+        },
+      ],
       optimization: false,
       outputHashing: 'none',
       generatePackageJson: false,
       sourceMap: true,
-    })
+    }),
   ],
 };

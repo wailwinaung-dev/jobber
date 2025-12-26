@@ -20,7 +20,7 @@ export class AuthService {
     const expiresAt = new Date();
     expiresAt.setMilliseconds(
       expiresAt.getMilliseconds() +
-        this.configService.getOrThrow('JWT_EXPIRATION_MS')
+        this.configService.getOrThrow('JWT_EXPIRATION') * 1000
     );
     return {
       access_token: await this.jwtService.signAsync(payload),

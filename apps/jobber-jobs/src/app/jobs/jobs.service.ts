@@ -10,10 +10,10 @@ import { AbstractJob } from './abstract.job';
 @Injectable()
 export class JobsService implements OnModuleInit {
   private jobs: DiscoveredClassWithMeta<JobMetadata>[] = [];
-  constructor(private discordService: DiscoveryService) {}
+  constructor(private discoveryService: DiscoveryService) {}
 
   async onModuleInit() {
-    this.jobs = await this.discordService.providersWithMetaAtKey<JobMetadata>(
+    this.jobs = await this.discoveryService.providersWithMetaAtKey<JobMetadata>(
       JOB_METADATA_KEY
     );
   }

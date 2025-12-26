@@ -23,6 +23,9 @@
   ],
   "references": [
     {
+      "path": "../../libs/protos/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/nestjs/tsconfig.lib.json"
     }
   ]
