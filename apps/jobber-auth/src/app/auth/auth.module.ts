@@ -16,7 +16,7 @@ import { AuthController } from './auth.controller';
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
         signOptions: {
-          expiresIn: configService.get('JWT_EXPIRATION'),
+          expiresIn: configService.getOrThrow('JWT_EXPIRATION'),
         },
       }),
     }),

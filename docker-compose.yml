@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  # The Database Service
+  # 1. Database (Postgres)
   postgres:
     image: postgres:16-alpine
     container_name: jobber_postgres
@@ -11,11 +9,27 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      # This creates the default DB for your Auth service
       POSTGRES_DB: jobber_auth
     volumes:
-      # Persist data so you don't lose users when you restart the container
       - postgres_data:/var/lib/postgresql/data
+
+  # 2. Message Broker (RabbitMQ)
+  rabbitmq:
+    image: rabbitmq:4.2.2-management
+    container_name: jobber_rabbitmq
+    restart: always
+    ports:
+      # Port for your NestJS App (AMQP Protocol)
+      - '5672:5672'
+      # Port for You (Web Management UI)
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      # Persist queues so they aren't lost on restart
+      - rabbitmq_data:/var/lib/rabbitmq
 
 volumes:
   postgres_data:
+  rabbitmq_data:

@@ -21,6 +21,18 @@ import { GqlAuthGuard } from '@jobber/nestjs';
           url: '0.0.0.0:50051',
         },
       },
+      {
+        name: 'JOB_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://user:password@localhost:5672'],
+          queue: 'transaction_queue',
+          queueOptions: {
+            durable: true,
+          },
+          persistent: true,
+        },
+      },
     ]),
   ],
   providers: [

@@ -23,12 +23,10 @@ export class AuthController implements AuthServiceController {
       const payload: JwtPayload = await this.jwtService.verifyAsync(
         request.token,
         {
-          secret: this.configService.get('JWT_SECRET'),
+          secret: this.configService.getOrThrow('JWT_SECRET'),
         }
       );
-
       const user = await this.authService.validateUser(payload);
-
       if (!user) {
         throw new UnauthorizedException('Invalid token');
       }
@@ -38,6 +36,7 @@ export class AuthController implements AuthServiceController {
         email: payload.email,
       };
     } catch (e) {
+      console.log(e);
       throw new UnauthorizedException('Invalid token');
     }
   }

@@ -17,10 +17,13 @@ export class AuthService {
   async logIn(loginInput: LoginInput) {
     const user = await this.verifyUser(loginInput);
     const payload: JwtPayload = { id: user.id, email: user.email };
+
     const expiresAt = new Date();
+    const expirationStr =
+      this.configService.getOrThrow<string>('JWT_EXPIRATION');
+    const expirationSeconds = parseInt(expirationStr);
     expiresAt.setMilliseconds(
-      expiresAt.getMilliseconds() +
-        this.configService.getOrThrow('JWT_EXPIRATION') * 1000
+      expiresAt.getMilliseconds() + expirationSeconds * 1000
     );
     return {
       access_token: await this.jwtService.signAsync(payload),
