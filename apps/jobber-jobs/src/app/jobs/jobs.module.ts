@@ -8,30 +8,37 @@ import { AUTH_PACKAGE_NAME } from '@jobber/protos';
 import { join } from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { GqlAuthGuard } from '@jobber/nestjs';
+import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     DiscoveryModule,
-    ClientsModule.register([
+    ClientsModule.registerAsync([
       {
         name: AUTH_PACKAGE_NAME,
-        transport: Transport.GRPC,
-        options: {
-          package: AUTH_PACKAGE_NAME,
-          protoPath: join(__dirname, 'proto/auth.proto'),
-          url: '0.0.0.0:50051',
-        },
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => ({
+          transport: Transport.GRPC,
+          options: {
+            package: AUTH_PACKAGE_NAME,
+            protoPath: join(__dirname, 'proto/auth.proto'),
+            url: config.getOrThrow<string>('GRPC_AUTH_URL'),
+          },
+        }),
       },
       {
         name: 'JOB_SERVICE',
-        transport: Transport.RMQ,
-        options: {
-          urls: ['amqp://user:password@localhost:5672'],
-          queue: 'transaction_queue',
-          queueOptions: {
-            durable: true,
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [config.getOrThrow<string>('RABBITMQ_URL')],
+            queue: 'transaction_queue',
+            queueOptions: {
+              durable: true,
+            },
+            persistent: true,
           },
-          persistent: true,
-        },
+        }),
       },
     ]),
   ],

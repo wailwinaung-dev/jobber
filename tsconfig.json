@@ -20,6 +20,12 @@
     },
     {
       "path": "./libs/protos"
+    },
+    {
+      "path": "./apps/jobber-excuter-e2e"
+    },
+    {
+      "path": "./apps/jobber-excuter"
     }
   ]
 }
